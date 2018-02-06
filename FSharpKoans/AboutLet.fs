@@ -15,7 +15,7 @@ module ``about let`` =
     let LetBindsANameToAValue() =
         let x = 50
         
-        AssertEquality x __
+        AssertEquality x 50
     
     (* In F#, values created with let are inferred to have a type like
        "int" for integer values, "string" for text values, and "bool" 
@@ -24,22 +24,29 @@ module ``about let`` =
     let LetInfersTheTypesOfValuesWherePossible() =
         let x = 50
         let typeOfX = x.GetType()
+
         AssertEquality typeOfX typeof<int>
 
         let y = "a string"
         let expectedType = y.GetType()
-        AssertEquality expectedType typeof<FILL_ME_IN>
+
+        AssertEquality expectedType typeof<string>
 
     [<Koan>]
     let YouCanMakeTypesExplicit() =
-        let (x:int) = 42
-        let typeOfX = x.GetType()
+        //let (x:int) = 42
+        //let typeOfX = x.GetType()
 
+        //let y:string = "forty two"
+        //let typeOfY = y.GetType()
+
+        let x:int = 42
+        let typeOfX = x.GetType()
         let y:string = "forty two"
         let typeOfY = y.GetType()
 
-        AssertEquality typeOfX typeof<FILL_ME_IN>
-        AssertEquality typeOfY typeof<FILL_ME_IN>
+        AssertEquality typeOfX typeof<int>
+        AssertEquality typeOfY typeof<string>
 
         (* You don't usually need to provide explicit type annotations types for 
            local variables, but type annotations can come in handy in other 
@@ -65,10 +72,12 @@ module ``about let`` =
 
     [<Koan>]
     let ModifyingTheValueOfVariables() =
+        //let mutable x = 100
+        //x <- 200
         let mutable x = 100
         x <- 200
 
-        AssertEquality x __
+        AssertEquality x 200
 
     [<Koan>]
     let YouCannotModifyALetBoundValueIfItIsNotMutable() =
@@ -82,4 +91,4 @@ module ``about let`` =
         //      to reuse the name of a value in some cases using "shadowing".
         let x = 100
          
-        AssertEquality x __
+        AssertEquality x 100
